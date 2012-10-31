@@ -4,7 +4,7 @@ Vagrant::Config.run do |config|
 	percona1_config.vm.host_name = "percona1"
 	percona1_config.ssh.max_tries = 100
 	#percona1_config.vm.boot_mode = :gui
-	percona1_config.vm.customize ["modifyvm", :id, "--memory", "256"]
+	percona1_config.vm.customize ["modifyvm", :id, "--memory", "1024"]
 	percona1_config.vm.network :hostonly, "192.168.70.2"
         percona1_config.vm.forward_port 55672, 55672
 	percona1_config.vm.provision :puppet do |percona1_puppet|

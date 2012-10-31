@@ -1,12 +1,21 @@
 
-This Vagrant setup used to demostrate the power of devops tools
+This Vagrant setup used to demonstrate the power of devops tools
 
 This is used with Centos 6 x86_64, and use a second nic for the galera replication.
 That base box can be retrieved on http://dl.dropbox.com/u/11697684/centos6.box.bz2
 
 
-How to use ?
+The goal of this repository is to demonstrate some deployment process using vagrant 
+with jenkins.
 
+The process is the following:
+
+In Jenkins create a new project and link it to this git repo.
+
+Then use exceute shell to build it. The command shoule be like this:
+
+vagrant destroy percona1 (if you use a custom workspace)
 vagrant up percona1
+tests/cucumber-puppet.sh
 
 
