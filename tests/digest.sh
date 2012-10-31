@@ -5,17 +5,19 @@ OLD_PATH=$(pwd)
 cd "/var/lib/jenkins/jobs/${JOB_NAME}"
 pwd
 mv digest.new digest.old 
-cd "$OLD_PATH"
-pwd
-ruby tests/digest.rb
-old_results=( $(cat "/var/lib/jenkins/jobs/${JOB_NAME}/digest.old") )
-new_results=( $(cat digest.new) )
-cp digest.new "/var/lib/jenkins/jobs/${JOB_NAME}/"
-SUCCESS=0
-total=${#old_results[@]}
-i="0"
-while [ $i -lt $total ]
-do
+if [ "x$?" == "x0" ]
+then
+ cd "$OLD_PATH"
+ pwd
+ ruby tests/digest.rb
+ old_results=( $(cat "/var/lib/jenkins/jobs/${JOB_NAME}/digest.old") )
+ new_results=( $(cat digest.new) )
+ cp digest.new "/var/lib/jenkins/jobs/${JOB_NAME}/"
+ SUCCESS=0
+ total=${#old_results[@]}
+ i="0"
+ while [ $i -lt $total ]
+ do
    string_old=${old_results[$i]}
    string_new=${new_results[$i]}
    if [ $(expr match "$string_old" '[0-9]*\([a-z]*\)') == $(expr match "$string_new}" '[0-9]*\([a-z]*\)') ] 
@@ -41,7 +43,11 @@ do
        fi
    fi
    i=$[$i+1]
-done
+ done
+else
+ echo "No reference file yet"
+ SUCCESS=1
+fi
 
 if [ $SUCCESS -eq 0 ]
 then
