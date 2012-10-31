@@ -6,5 +6,5 @@ node percona1 {
 	Class['percona::repository'] -> Class['percona::server'] -> Class['percona::server::config'] 
 
 	class {'percona::server::config': perconaserverid => "1" }
-	class {'percona::server::service': ensure => "running" }
+	class {'percona::server::service': ensure => "stopped" }
 }
