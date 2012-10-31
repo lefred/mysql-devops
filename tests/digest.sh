@@ -2,7 +2,7 @@
 
 #set -x
 OLD_PATH=$(pwd)
-cd "/var/lib/jenkins/jobs/${JOB_NAME}/tests"
+cd "/var/lib/jenkins/jobs/${JOB_NAME}/${WORKSPACE}/tests"
 pwd
 mv results.new results.old 
 cd "$OLD_PATH"
