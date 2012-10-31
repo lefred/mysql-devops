@@ -2,15 +2,15 @@
 
 #set -x
 OLD_PATH=$(pwd)
-cd "/var/lib/jenkins/jobs/${JOB_NAME}/${WORKSPACE}/tests"
+cd "/var/lib/jenkins/jobs/${JOB_NAME}/workspace/tests"
 pwd
 mv results.new results.old 
 cd "$OLD_PATH"
 pwd
 ruby tests/digest.rb
-old_results=( $(cat "/var/lib/jenkins/jobs/${JOB_NAME}/${WORKSPACE}/tests/results.old") )
+old_results=( $(cat "/var/lib/jenkins/jobs/${JOB_NAME}/workspace/tests/results.old") )
 new_results=( $(cat results.new) )
-cp results.new "/var/lib/jenkins/jobs/${JOB_NAME}/${WORKSPACE}/tests/"
+cp results.new "/var/lib/jenkins/jobs/${JOB_NAME}/workspace/tests/"
 SUCCESS=0
 total=${#old_results[@]}
 i="0"
